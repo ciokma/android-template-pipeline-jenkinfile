@@ -1,5 +1,8 @@
 pipeline {
         agent any
+        tools {
+            gradle "gradle8"
+        }
         parameters {
             string(name: 'myInput', description: 'Some pipeline parameters')
         }
@@ -15,6 +18,15 @@ pipeline {
                 steps {
                     script {
                         echo "Job input parameter: "
+                    }
+                }
+            }
+            stage('Gradle') {
+                steps {
+                    script {
+                        gradle "--version"
+                        gradle "clean"
+                        gradle "build"
                     }
                 }
             }
