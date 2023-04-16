@@ -27,6 +27,7 @@ pipeline {
                         gradle "--version"
                         gradle "clean"
                         gradle "build"
+                        gradle "assembleDebug"
                     }
                 }
             }
