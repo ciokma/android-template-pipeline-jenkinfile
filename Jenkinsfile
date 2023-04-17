@@ -56,6 +56,19 @@ pipeline {
                     }
                 }
             }
+            stage('Upload to App Center') {
+               steps {
+                    withCredentials([string(credentialsId: 'app-center-token', variable: 'APPCENTER_TOKEN')]) {
+                        script {
+                            echo "currentBuild.number  ${currentBuild.number}"
+
+                            echo "currentBuild.result  ${currentBuild.result}"
+                            echo "Subiendo Aplicacion a AppCenter"
+                            appCenter apiToken: '$APPCENTER_TOKEN', appName: 'mobile-android-app', branchName: '', buildVersion: '', commitHash: '', distributionGroups: 'mobile-android-group', mandatoryUpdate: false, notifyTesters: true, ownerName: 'ciokma', pathToApp: '**/*', pathToDebugSymbols: '', pathToReleaseNotes: '', releaseNotes: ''
+                        }
+                    }
+                }
+            }
         }
         post {
             always {
