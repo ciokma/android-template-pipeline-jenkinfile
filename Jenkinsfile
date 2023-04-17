@@ -25,17 +25,7 @@ pipeline {
             stage('SonarQube Analysis') {
                 steps {
                      script {
-                        bat """sonar-scanner \
-                        -D sonar.projectVersion=1.0-SNAPSHOT \
-                        -D sonar.login=devops \
-                        -D sonar.password=devops \
-                        -D sonar.projectBaseDir=C:/ProgramData/Jenkins/.jenkins/workspace/android-mobile-pipeline/ \
-                            -D sonar.projectKey=android-template-jenkin \
-                            -D sonar.sourceEncoding=UTF-8 \
-                            -D sonar.language=java \
-                            -D sonar.sources=app/src/main \
-                            -D sonar.tests=app/src/test \
-                            -D sonar.host.url=http://localhost:9000/"""
+                        bat """sonar-scanner -D sonar.login=sqp_846d18024c9a0c129203055c7ac76218181e4309 -D sonar.projectKey=android-template-jenkin -D sonar.host.url=http://localhost:9000/"""
                      }
                 }
                
