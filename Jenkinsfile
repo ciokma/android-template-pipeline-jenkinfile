@@ -7,24 +7,19 @@ pipeline {
             string(name: 'myInput', description: 'Some pipeline parameters')
         }
         stages {
-            stage('Stage one') {
-                steps {
-                    script {
-                        echo "Parameter from template creation: " 
-                    }
-                }
-            }
-            stage('Stage two') {
-                steps {
-                    script {
-                        echo "Job input parameter: "
-                    }
-                }
-            }
-            stage('Gradle') {
+     
+            stage('Gradle Build') {
                 steps {
                     script {
                         bat "gradle clean build assembleDebug"
+                    }
+                }
+            }
+            stage('Gradle Test') {
+            // Ejecuta las pruebas unitarias de Android
+                steps {
+                    script {
+                        bat "gradle test"
                     }
                 }
             }
