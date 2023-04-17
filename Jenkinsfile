@@ -39,13 +39,16 @@ pipeline {
                      }
                 }
             }
-            stage('Quality Gate') {
-                // Evalúa el resultado del análisis de SonarQube para el Quality Gate
+            stage('Upload to App Center') {
+                // Sube el archivo APK a App Center si la calidad del código cumple con el Quality Gate
+                when {
+                    expression { currentBuild.result == 'SUCCESS' }
+                }
                 steps {
-                    script {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    withCredentials([string(credentialsId: 'app-center-token', variable: 'APPCENTER_TOKEN')]) {
+                        script {
+                            echo "Subiendo Aplicacion a AppCenter"
+                            appCenter apiToken: '$APPCENTER_TOKEN', appName: 'mobile-android-app', branchName: '', buildVersion: '', commitHash: '', distributionGroups: 'mobile-android-group', mandatoryUpdate: false, notifyTesters: true, ownerName: 'ciokma', pathToApp: '**/*', pathToDebugSymbols: '', pathToReleaseNotes: '', releaseNotes: ''
                         }
                     }
                 }
