@@ -1,0 +1,6 @@
+projectKey=android-template-jenkin
+serverUrl=http://localhost:9000
+serverVersion=9.9.0.65466
+dashboardUrl=http://localhost:9000/dashboard?id=android-template-jenkin
+ceTaskId=AYePmmtIk__2sM99iTI6
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYePmmtIk__2sM99iTI6
