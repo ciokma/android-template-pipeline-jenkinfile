@@ -25,10 +25,7 @@ pipeline {
             stage('SonarQube Analysis') {
                 steps {
                      script {
-                        bat "sonar-scanner 
-                         -D sonar.login=sqp_846d18024c9a0c129203055c7ac76218181e4309
-                         -D sonar.projectKey=android-template-jenkin
-                         -D sonar.host.url=http://localhost:9000/"
+                        bat "sonar-scanner -D sonar.login=sqp_846d18024c9a0c129203055c7ac76218181e4309 -D sonar.projectKey=android-template-jenkin -D sonar.host.url=http://localhost:9000/"
                      }
                 }
                
