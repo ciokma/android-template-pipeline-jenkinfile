@@ -2,12 +2,9 @@ pipeline {
         agent any
         tools {
             gradle "gradle8"
-            scannerHome = "SonarQube"
+            scannerHome  "SonarQube"
         }
- 
-        parameters {
-            string(name: 'myInput', description: 'Some pipeline parameters')
-        }
+
         stages {
      
             stage('Gradle Build') {
