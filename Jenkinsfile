@@ -40,6 +40,9 @@ pipeline {
                 }
             }
             stage('Upload to App Center') {
+                echo "currentBuild.number  ${currentBuild.number}"
+
+                echo "currentBuild.result  ${currentBuild.result}"
                 // Sube el archivo APK a App Center si la calidad del código cumple con el Quality Gate
                 when {
                     expression { currentBuild.result == 'SUCCESS' }
