@@ -25,21 +25,24 @@ pipeline {
                     }
                 }
             }
+            
             stage('SonarQube Analysis') {
+                steps {
+                     withSonarQubeEnv('SonarQube') {
+                        bat """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
+                        -D sonar.projectVersion=1.0-SNAPSHOT \
+                        -D sonar.login=devops \
+                        -D sonar.password=devops \
+                        -D sonar.projectBaseDir=C:/ProgramData/Jenkins/.jenkins/workspace/android-mobile-pipeline/ \
+                            -D sonar.projectKey=android-template-jenkin \
+                            -D sonar.sourceEncoding=UTF-8 \
+                            -D sonar.language=java \
+                            -D sonar.sources=app/src/main \
+                            -D sonar.tests=app/src/test \
+                            -D sonar.host.url=http://localhost:9000/"""
+                            }
+                }
                
-                withSonarQubeEnv('SonarQube') {
-                bat """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
-                -D sonar.projectVersion=1.0-SNAPSHOT \
-                -D sonar.login=admin \
-                -D sonar.password=admin \
-                -D sonar.projectBaseDir=/var/lib/jenkins/workspace/jenkins-sonar/ \
-                    -D sonar.projectKey=android-template-jenkin \
-                    -D sonar.sourceEncoding=UTF-8 \
-                    -D sonar.language=java \
-                    -D sonar.sources=app/src/main \
-                    -D sonar.tests=app/src/test \
-                    -D sonar.host.url=http://localhost:9000/"""
-                    }
             }
         }
         post {
