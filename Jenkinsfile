@@ -56,7 +56,7 @@ pipeline {
                     }
                 }
             }
-            stage('Upload to App Center') {
+            stage('Upload to App Center 2') {
                steps {
                     withCredentials([string(credentialsId: 'app-center-token', variable: 'APPCENTER_TOKEN')]) {
                         script {
