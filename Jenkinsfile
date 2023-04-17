@@ -24,7 +24,7 @@ pipeline {
             
             stage('SonarQube Analysis') {
                 steps {
-                     withSonarQubeEnv('SonarQube') {
+                     script {
                         bat """sonar-scanner \
                         -D sonar.projectVersion=1.0-SNAPSHOT \
                         -D sonar.login=devops \
@@ -36,7 +36,7 @@ pipeline {
                             -D sonar.sources=app/src/main \
                             -D sonar.tests=app/src/test \
                             -D sonar.host.url=http://localhost:9000/"""
-                            }
+                     }
                 }
                
             }
