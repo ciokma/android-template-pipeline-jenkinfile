@@ -23,6 +23,17 @@ pipeline {
                     }
                 }
             }
+            stage('SonarQube Scan') {
+                // Escanea el proyecto con SonarQube
+                environment {
+                    scannerHome = tool 'SonarScanner'
+                }
+                steps {
+                    script {
+                        bat "gradle test"
+                    }
+                }
+            }
         }
         post {
             always {
