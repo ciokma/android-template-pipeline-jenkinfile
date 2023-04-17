@@ -2,7 +2,9 @@ pipeline {
         agent any
         tools {
             gradle "gradle8"
+            scannerHome = "SonarQube"
         }
+ 
         parameters {
             string(name: 'myInput', description: 'Some pipeline parameters')
         }
@@ -23,8 +25,8 @@ pipeline {
                     }
                 }
             }
-           stage('SonarQube Analysis') {
-                def scannerHome = tool 'SonarQube'
+            stage('SonarQube Analysis') {
+               
                 withSonarQubeEnv('SonarQube') {
                 bat """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
                 -D sonar.projectVersion=1.0-SNAPSHOT \
