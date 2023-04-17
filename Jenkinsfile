@@ -30,6 +30,15 @@ pipeline {
                 }
                
             }
+            stage('Firmar APK') {
+                // Firma el archivo APK para su uso en producción
+                steps {
+                    script {
+                        echo "Firmando APK"
+                        bat "gradle assembleRelease --stacktrace --no-daemon"
+                     }
+                }
+            }
         }
         post {
             always {
