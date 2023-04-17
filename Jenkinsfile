@@ -24,10 +24,7 @@ pipeline {
             stage('Gradle') {
                 steps {
                     script {
-                        gradle "--version"
-                        gradle "clean"
-                        gradle "build"
-                        gradle "assembleDebug"
+                        sh "./gradlew clean build"
                     }
                 }
             }
