@@ -32,14 +32,6 @@ pipeline {
         post {
             always {
                 archiveArtifacts 'app/build/outputs/**/*.apk'
-                publishHTML target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'app/build/reports',
-                    reportFiles: 'index.html',
-                    reportName: 'Test Report'
-                ]
             }
            
 	    }
