@@ -69,13 +69,7 @@ pipeline {
                             nexusVersion: 'nexus3',
                             protocol: 'http',
                             repository: 'android-mobile-app',
-                            version: '01-INITIAL',
-                            artifacts: [
-                                [artifactId: "android-mobile",
-                                classifier: '',
-                                file: 'my-service-' +  ${currentBuild.number}  + '.apk',
-                                type: 'apk']
-                            ]
+                            version: '01-INITIAL'
                     }
                 }
             }
