@@ -61,7 +61,7 @@ pipeline {
 
                             echo "currentBuild.result  ${currentBuild.result}"
                             echo "Subiendo Aplicacion a AppCenter"
-                            appCenter apiToken: '${APPCENTER_TOKEN}', appName: 'mobile-android-app', branchName: '', buildVersion: '${currentBuild.number}', commitHash: '', distributionGroups: 'mobile-android-group', mandatoryUpdate: false, notifyTesters: true, ownerName: 'ciokma', pathToApp: '**/app-debug.apk', pathToDebugSymbols: '', pathToReleaseNotes: '', releaseNotes: ''
+                            appCenter apiToken: 'a56141d577a054065c8c29ef4d2be60cfb7a45b9', appName: 'mobile-android-app', branchName: '', buildVersion: '${currentBuild.number}', commitHash: '', distributionGroups: 'mobile-android-group', mandatoryUpdate: false, notifyTesters: true, ownerName: 'ciokma', pathToApp: '**/app-debug.apk', pathToDebugSymbols: '', pathToReleaseNotes: '', releaseNotes: ''
                         }
                     }
                 }
