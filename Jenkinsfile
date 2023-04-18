@@ -3,7 +3,7 @@ pipeline {
         tools {
             gradle "gradle8"
         }
-
+       
         stages {
      
             stage('Gradle Build') {
@@ -54,16 +54,22 @@ pipeline {
                 }
             }
             stage('Upload to App Center 2') {
+               environment {
+                    APPCENTER_API_TOKEN = credentials('app-center-token')
+               }
                steps {
-                    withCredentials([string(credentialsId: 'app-center-token', variable: 'APPCENTER_TOKEN')]) {
                         script {
                             echo "currentBuild.number  ${currentBuild.number}"
-
-                            echo "currentBuild.result  ${currentBuild.result}"
                             echo "Subiendo Aplicacion a AppCenter"
-                            appCenter apiToken: 'a56141d577a054065c8c29ef4d2be60cfb7a45b9', appName: 'mobile-android-app', branchName: '', buildVersion: '${currentBuild.number}', commitHash: '', distributionGroups: 'mobile-android-group', mandatoryUpdate: false, notifyTesters: true, ownerName: 'ciokma', pathToApp: '**/app-debug.apk', pathToDebugSymbols: '', pathToReleaseNotes: '', releaseNotes: ''
+                            appCenter apiToken: APPCENTER_API_TOKEN,
+                                appName: 'mobile-android-app',
+                                branchName: '',
+                                buildVersion: "${currentBuild.number}",
+                                distributionGroups: 'mobile-android-group',
+                                ownerName: 'ciokma',
+                                pathToApp: '**/app-debug.apk'                                
                         }
-                    }
+                    
                 }
             }
         }
