@@ -40,20 +40,6 @@ pipeline {
                 }
             }
             stage('Upload to App Center') {
-                // Sube el archivo APK a App Center si la calidad del código cumple con el Quality Gate
-                when {
-                    expression { currentBuild.result == 'SUCCESS' }
-                }
-                steps {
-                    withCredentials([string(credentialsId: 'app-center-token', variable: 'APPCENTER_TOKEN')]) {
-                        script {
-                            echo "Subiendo Aplicacion a AppCenter"
-                            appCenter apiToken: '$APPCENTER_TOKEN', appName: 'mobile-android-app', branchName: '', buildVersion: '', commitHash: '', distributionGroups: 'mobile-android-group', mandatoryUpdate: false, notifyTesters: true, ownerName: 'ciokma', pathToApp: '**/*', pathToDebugSymbols: '', pathToReleaseNotes: '', releaseNotes: ''
-                        }
-                    }
-                }
-            }
-            stage('Upload to App Center 2') {
                environment {
                     APPCENTER_API_TOKEN = credentials('app-center-token')
                }
@@ -70,6 +56,21 @@ pipeline {
                                 pathToApp: '**/app-debug.apk'                                
                         }
                     
+                }
+            }
+            stage('Upload to Nexus') {
+                steps {
+                    script {
+                        echo "subiendo version numero ${currentBuild.number} a nexus"
+
+                        nexusArtifactUploader credentialsId: 'nexus-credentials',
+                        groupId: 'android-mobile',
+                        nexusUrl: 'localhost:8081',
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        repository: 'android-mobile-app',
+                        version: '01-INITIAL'
+                    }
                 }
             }
         }
