@@ -63,8 +63,7 @@ pipeline {
                     script {
                         echo "subiendo version numero ${currentBuild.number} a nexus"
 
-                        nexusArtifactUploader
-                            credentialsId: 'nexus-credentials',
+                        nexusArtifactUploader credentialsId: 'nexus-credentials',
                             groupId: 'android-mobile',
                             nexusUrl: 'localhost:8081',
                             nexusVersion: 'nexus3',
