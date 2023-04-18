@@ -60,7 +60,7 @@ pipeline {
             }
             stage('Upload to Nexus') {
                 steps {
-                    nexusArtifactUploader artifacts: [[artifactId: '01-mobile-android', classifier: '', file: 'app/build/outputs/apk/debug/app-debug.apk', type: 'apk']], credentialsId: 'nexus-credentials', groupId: 'android-mobile', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'android-mobile-app', version: '01-INITIAL'
+                    nexusArtifactUploader artifacts: [[artifactId: '01-mobile-android', classifier: '', file: 'app/build/outputs/apk/debug/app-debug.apk', type: 'apk']], credentialsId: 'nexus-credentials', groupId: 'android-mobile', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'android-mobile-app', version: '${currentBuild.number}-INITIAL'
                 }
             }
         }
